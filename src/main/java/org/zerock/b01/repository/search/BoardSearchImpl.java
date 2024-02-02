@@ -4,7 +4,6 @@ import com.querydsl.jpa.JPQLQuery;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
-import org.zerock.b01.domain.Board;
 import org.zerock.b01.domain.QBoard;
 
 import java.util.List;
