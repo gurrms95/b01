@@ -8,9 +8,9 @@ public interface BoardService {
 
     Long register(BoardDTO boardDTO);
 
-    BoardDTO readOne(Long bno);
+    BoardDTO readOne(Long bno) throws Exception;
 
-    void modify(BoardDTO boardDTO);
+    void modify(BoardDTO boardDTO) throws Exception;
 
     void remove(Long bno);
 

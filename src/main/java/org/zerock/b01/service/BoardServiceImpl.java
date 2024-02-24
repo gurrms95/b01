@@ -39,11 +39,11 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public BoardDTO readOne(Long bno) {
+    public BoardDTO readOne(Long bno) throws Exception {
 
         Optional<Board> result = boardRepository.findById(bno);
 
-        Board board = result.orElseThrow();
+        Board board = result.orElseThrow(() -> new Exception());
 
         BoardDTO boardDTO = modelMapper.map(board, BoardDTO.class);
 
@@ -51,11 +51,11 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public void modify(BoardDTO boardDTO) {
+    public void modify(BoardDTO boardDTO) throws Exception {
 
         Optional<Board> result = boardRepository.findById(boardDTO.getBno());
 
-        Board board = result.orElseThrow();
+        Board board = result.orElseThrow(() -> new Exception());
 
         board.change(boardDTO.getTitle(), boardDTO.getContent());
 
