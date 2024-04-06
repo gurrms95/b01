@@ -6,6 +6,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +16,6 @@ import org.zerock.b01.dto.PageRequestDTO;
 import org.zerock.b01.dto.PageResponseDTO;
 import org.zerock.b01.service.BoardService;
 
-import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/board")
@@ -42,7 +42,7 @@ public class BoardController {
     }
 
     @PostMapping("/register")
-    public String registerPost(@Valid BoardDTO boardDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes){
+    public String registerPost(@Validated BoardDTO boardDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes){
 
         log.info("board POST register.......");
 
@@ -75,7 +75,7 @@ public class BoardController {
 
 
     @GetMapping({"/read", "/modify"})
-    public void read(Long bno, PageRequestDTO pageRequestDTO, Model model){
+    public void read(Long bno, PageRequestDTO pageRequestDTO, Model model) throws Exception {
 
         BoardDTO boardDTO = boardService.readOne(bno);
 
@@ -87,9 +87,9 @@ public class BoardController {
 
     @PostMapping("/modify")
     public String modify( PageRequestDTO pageRequestDTO,
-                          @Valid BoardDTO boardDTO,
+                          @Validated BoardDTO boardDTO,
                           BindingResult bindingResult,
-                          RedirectAttributes redirectAttributes){
+                          RedirectAttributes redirectAttributes) throws Exception {
 
         log.info("board modify post......." + boardDTO);
 

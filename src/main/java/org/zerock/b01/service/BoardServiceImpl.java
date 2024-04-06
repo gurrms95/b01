@@ -1,5 +1,6 @@
 package org.zerock.b01.service;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
@@ -12,7 +13,6 @@ import org.zerock.b01.dto.PageRequestDTO;
 import org.zerock.b01.dto.PageResponseDTO;
 import org.zerock.b01.repository.BoardRepository;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -39,11 +39,11 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public BoardDTO readOne(Long bno) throws Exception {
+    public BoardDTO readOne(Long bno) {
 
         Optional<Board> result = boardRepository.findById(bno);
 
-        Board board = result.orElseThrow(() -> new Exception());
+        Board board = result.orElseThrow();
 
         BoardDTO boardDTO = modelMapper.map(board, BoardDTO.class);
 
@@ -51,11 +51,11 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public void modify(BoardDTO boardDTO) throws Exception {
+    public void modify(BoardDTO boardDTO) {
 
         Optional<Board> result = boardRepository.findById(boardDTO.getBno());
 
-        Board board = result.orElseThrow(() -> new Exception());
+        Board board = result.orElseThrow();
 
         board.change(boardDTO.getTitle(), boardDTO.getContent());
 
