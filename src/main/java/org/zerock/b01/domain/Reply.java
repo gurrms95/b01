@@ -1,7 +1,7 @@
 package org.zerock.b01.domain;
 
-import jakarta.persistence.*;
 import lombok.*;
+import jakarta.persistence.*;
 
 
 @Entity
@@ -13,7 +13,9 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(exclude = "board")
-public class Reply  extends BaseEntity{
+//@ToString
+public class Reply extends BaseEntity{
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long rno;
@@ -24,4 +26,11 @@ public class Reply  extends BaseEntity{
     private String replyText;
 
     private String replyer;
+
+    public void changeText(String text){
+        this.replyText = text;
+    }
+
 }
+
+
